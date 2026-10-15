@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e1a">
+<meta name="description" content="StormLok protects your solar investment from lightning damage. Real-time storm tracking, live lightning detection, and a loud alarm that tells you when to disconnect.">
+<meta property="og:title" content="StormLok — Solar Lightning Protection">
+<meta property="og:description" content="Your solar system's first line of defence.">
+<title>StormLok — Solar Protection · Your System's First Line of Defence</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%23121a38'/%3E%3Cpath d='M108 152 L404 152 L404 260 C404 340 340 400 256 448 C172 400 108 340 108 260 Z' fill='white'/%3E%3Cpath d='M310 130 L180 290 L244 290 L200 402 L330 244 L270 244 Z' fill='%23ffb84d'/%3E%3C/svg%3E">
+<style>
+:root {
+    --bg: #0a0e1a; --card: #151a2e; --card2: #1a2040; --field: #0f1428;
+    --line: #232a44; --txt: #e8ecff; --muted: #8b96c4;
+    --accent: #4f7cff; --accent2: #8b5cf6;
+    --good: #25d07a; --warn: #ffb347; --crit: #ff1a3c; --gold: #ffb84d;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--txt); line-height: 1.6;
+    overflow-x: hidden; font-size: 16px;
+}
+header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+}
+.nav {
+    max-width: 1180px; margin: 0 auto; padding: 14px 20px;
+    display: flex; align-items: center; gap: 16px;
+}
+.nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--txt); flex-shrink: 0;
+}
+.nav-logo svg { width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0; }
+.nav-logo-text { font-weight: 900; font-size: 1.15rem; letter-spacing: 0.3px; }
+.nav-links { display: flex; gap: 4px; margin-left: auto; align-items: center; }
+.nav-links a {
+    padding: 9px 14px; border-radius: 9px; color: var(--muted);
+    text-decoration: none; font-weight: 600; font-size: 14px;
+    transition: all 0.15s; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--txt); background: rgba(79, 124, 255, 0.1); }
+.nav-cta {
+    padding: 10px 18px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white !important; border-radius: 10px;
+    font-weight: 700 !important; font-size: 13.5px !important;
+    box-shadow: 0 4px 14px rgba(79, 124, 255, 0.35);
+}
+.nav-cta:hover { background: linear-gradient(135deg, #6089ff, #9c6eff) !important; transform: translateY(-1px); }
+.hamburger {
+    display: none; width: 42px; height: 42px; border-radius: 10px;
+    background: var(--field); border: 1px solid var(--line);
+    color: var(--txt); font-size: 20px; cursor: pointer; margin-left: auto;
+}
+.mobile-menu {
+    display: none; position: fixed; inset: 0;
+    background: rgba(10, 14, 26, 0.98);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    z-index: 99; padding: 90px 24px 40px;
+    flex-direction: column; gap: 6px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+    padding: 16px 18px; color: var(--txt); text-decoration: none;
+    font-weight: 700; font-size: 17px; border-radius: 12px;
+    background: var(--field); border: 1px solid var(--line);
+}
+.mobile-menu a:active { background: var(--card2); }
+
+section { padding: 80px 20px; position: relative; }
+.container { max-width: 1080px; margin: 0 auto; }
+.eyebrow {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); font-weight: 800; margin-bottom: 12px;
+}
+h1, h2, h3 { line-height: 1.2; font-weight: 800; }
+h2.section-title {
+    font-size: clamp(28px, 4vw, 42px); margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+.section-sub {
+    color: var(--muted); font-size: clamp(15px, 2vw, 18px);
+    max-width: 640px; margin-bottom: 48px; line-height: 1.6;
+}
+
+.hero {
+    padding-top: 60px; padding-bottom: 80px;
+    background:
+        radial-gradient(ellipse 800px 400px at 50% 0%, rgba(79, 124, 255, 0.15), transparent 70%),
+        radial-gradient(ellipse 600px 400px at 80% 30%, rgba(139, 92, 246, 0.1), transparent 70%);
+    text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+    content: ''; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); width: 1000px; height: 600px;
+    background: radial-gradient(circle, rgba(79, 124, 255, 0.08), transparent 60%);
+    pointer-events: none;
+}
+.hero-icon {
+    width: 108px; height: 108px; margin: 0 auto 28px; border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(79, 124, 255, 0.3), 0 0 80px rgba(255, 184, 77, 0.15);
+    display: block; animation: float 6s ease-in-out infinite;
+}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+h1.hero-title {
+    font-size: clamp(38px, 7vw, 72px); letter-spacing: -1.5px;
+    margin-bottom: 20px; line-height: 1.05;
+    background: linear-gradient(180deg, #fff 0%, #b8c8ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+    font-size: clamp(16px, 2.2vw, 20px); color: var(--muted);
+    max-width: 620px; margin: 0 auto 40px; line-height: 1.5;
+}
+.hero-ctas {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 48px;
+}
+.btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 15px 30px; border-radius: 14px; font-weight: 700;
+    font-size: 15px; text-decoration: none; cursor: pointer;
+    border: none; transition: all 0.15s; font-family: inherit;
+    white-space: nowrap;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; box-shadow: 0 8px 24px rgba(79, 124, 255, 0.4);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(79, 124, 255, 0.5); }
+.btn-secondary { background: var(--card); color: var(--txt); border: 1px solid var(--line); }
+.btn-secondary:hover { background: var(--card2); border-color: var(--accent); }
+.hero-stats {
+    display: flex; justify-content: center; gap: 48px;
+    flex-wrap: wrap; margin-top: 40px;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+    font-size: clamp(24px, 3.5vw, 34px); font-weight: 900;
+    color: var(--gold); line-height: 1; font-variant-numeric: tabular-nums;
+}
+.hero-stat-label {
+    font-size: 12px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1.2px; font-weight: 700; margin-top: 8px;
+}
+
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.problem-text p { color: var(--muted); margin-bottom: 16px; font-size: 16px; line-height: 1.7; }
+.problem-text strong { color: var(--txt); font-weight: 700; }
+.problem-stats { display: flex; flex-direction: column; gap: 14px; }
+.problem-stat {
+    background: linear-gradient(135deg, rgba(255, 26, 60, 0.08), rgba(255, 107, 26, 0.05));
+    border: 1px solid rgba(255, 26, 60, 0.25);
+    border-radius: 16px; padding: 20px 22px;
+}
+.problem-stat-label {
+    font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1.2px; font-weight: 700; margin-bottom: 6px;
+}
+.problem-stat-value {
+    font-size: 24px; font-weight: 900; color: var(--crit);
+    font-variant-numeric: tabular-nums; line-height: 1.1;
+}
+.problem-stat-desc { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.feature-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 18px; padding: 28px 24px;
+    transition: all 0.2s; position: relative; overflow: hidden;
+}
+.feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.2s;
+}
+.feature-card:hover {
+    border-color: var(--accent); transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+.feature-card:hover::before { opacity: 1; }
+.feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(79, 124, 255, 0.15), rgba(139, 92, 246, 0.1));
+    border: 1px solid rgba(79, 124, 255, 0.3);
+    display: grid; place-items: center; font-size: 24px; margin-bottom: 18px;
+}
+.feature-title { font-size: 17px; font-weight: 800; margin-bottom: 10px; color: var(--txt); }
+.feature-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+.step { text-align: center; padding: 24px 16px; }
+.step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; font-weight: 900; font-size: 22px;
+    display: grid; place-items: center; margin: 0 auto 18px;
+    box-shadow: 0 8px 24px rgba(79, 124, 255, 0.35);
+}
+.step-title { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+.levels-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
+.level {
+    border-radius: 16px; padding: 24px 18px; text-align: center;
+    border: 2px solid; transition: transform 0.2s;
+}
+.level:hover { transform: translateY(-3px); }
+.level-clear { background: rgba(37, 208, 122, 0.06); border-color: var(--good); }
+.level-building { background: rgba(255, 210, 63, 0.08); border-color: #ffd23f; }
+.level-active { background: rgba(255, 107, 26, 0.12); border-color: #ff6b1a; }
+.level-imminent { background: rgba(255, 26, 60, 0.14); border-color: var(--crit); }
+.level-name {
+    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    font-weight: 900; margin-bottom: 10px;
+}
+.level-clear .level-name { color: var(--good); }
+.level-building .level-name { color: #ffd23f; }
+.level-active .level-name { color: #ff6b1a; }
+.level-imminent .level-name { color: var(--crit); }
+.level-score { font-size: 13px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+.level-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+/* ============ DEMO VIDEO ============ */
+.video-wrap { max-width: 780px; margin: 0 auto 40px; }
+.video-frame {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    background: #000; border-radius: 20px; overflow: hidden;
+    border: 2px solid var(--line);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(79, 124, 255, 0.15);
+    transition: transform 0.2s, border-color 0.2s;
+    text-decoration: none; display: block;
+}
+.video-frame:hover { transform: translateY(-3px); border-color: var(--accent); }
+.video-frame iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+}
+.video-placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+    background:
+        radial-gradient(ellipse 500px 300px at 50% 50%, rgba(79, 124, 255, 0.15), transparent 70%),
+        linear-gradient(135deg, #0f1428, #151a2e);
+    text-align: center; padding: 24px;
+}
+.video-play-icon {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; font-size: 26px; display: grid; place-items: center;
+    box-shadow: 0 12px 36px rgba(79, 124, 255, 0.5);
+    padding-left: 6px; margin-bottom: 8px;
+    animation: pulsePlay 2.4s ease-in-out infinite;
+}
+@keyframes pulsePlay {
+    0%, 100% { transform: scale(1); box-shadow: 0 12px 36px rgba(79, 124, 255, 0.5); }
+    50% { transform: scale(1.06); box-shadow: 0 16px 48px rgba(79, 124, 255, 0.7); }
+}
+.video-placeholder-title { font-size: 20px; font-weight: 800; color: var(--txt); }
+.video-placeholder-sub {
+    font-size: 13px; color: var(--muted); font-weight: 600; max-width: 340px;
+}
+
+/* ============ STORYBOARD / GUIDE CTA ============ */
+.cta-card {
+    max-width: 780px; margin: 0 auto 32px;
+    display: flex; align-items: center; gap: 18px;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, rgba(79, 124, 255, 0.12), rgba(139, 92, 246, 0.08));
+    border: 1.5px solid rgba(79, 124, 255, 0.35);
+    border-radius: 18px; text-decoration: none; color: var(--txt);
+    transition: all 0.18s;
+}
+.cta-card:hover {
+    border-color: var(--accent); transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(79, 124, 255, 0.2);
+}
+.cta-card.gold {
+    background: linear-gradient(135deg, rgba(255, 184, 77, 0.12), rgba(255, 107, 26, 0.08));
+    border-color: rgba(255, 184, 77, 0.4);
+}
+.cta-card.gold:hover {
+    border-color: var(--gold);
+    box-shadow: 0 12px 32px rgba(255, 184, 77, 0.2);
+}
+.cta-icon {
+    width: 54px; height: 54px; flex-shrink: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: grid; place-items: center;
+    font-size: 24px; color: white;
+    box-shadow: 0 8px 24px rgba(79, 124, 255, 0.4);
+}
+.cta-card.gold .cta-icon {
+    background: linear-gradient(135deg, var(--gold), #ff6b1a);
+    box-shadow: 0 8px 24px rgba(255, 184, 77, 0.4);
+}
+.cta-body { flex: 1; min-width: 0; }
+.cta-label {
+    font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--accent); font-weight: 800; margin-bottom: 4px;
+}
+.cta-card.gold .cta-label { color: var(--gold); }
+.cta-title {
+    font-size: 16px; font-weight: 800; color: var(--txt);
+    margin-bottom: 3px; line-height: 1.3;
+}
+.cta-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.cta-arrow {
+    font-size: 22px; color: var(--accent);
+    flex-shrink: 0; font-weight: 800;
+    transition: transform 0.18s;
+}
+.cta-card.gold .cta-arrow { color: var(--gold); }
+.cta-card:hover .cta-arrow { transform: translateX(4px); }
+
+.demo-points {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; max-width: 780px; margin: 0 auto;
+}
+.demo-point {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 16px;
+    display: flex; align-items: center; gap: 12px;
+    transition: border-color 0.15s;
+}
+.demo-point:hover { border-color: var(--accent); }
+.demo-point-icon { font-size: 22px; flex-shrink: 0; }
+.demo-point-text {
+    font-size: 13.5px; font-weight: 700; color: var(--txt); line-height: 1.35;
+}
+
+.audience-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.audience-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 18px; padding: 26px; display: flex;
+    gap: 18px; align-items: flex-start; transition: border-color 0.2s;
+}
+.audience-card:hover { border-color: var(--accent); }
+.audience-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(79, 124, 255, 0.15), rgba(139, 92, 246, 0.1));
+    border: 1px solid rgba(79, 124, 255, 0.3);
+    display: grid; place-items: center; font-size: 26px; flex-shrink: 0;
+}
+.audience-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.audience-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+.setup-list { display: grid; gap: 12px; max-width: 720px; margin: 0 auto 24px; }
+.setup-item {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 22px;
+    display: flex; align-items: center; gap: 16px;
+}
+.setup-item-num {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; font-weight: 800;
+    display: grid; place-items: center; font-size: 14px; flex-shrink: 0;
+}
+.setup-item-text { font-size: 14.5px; line-height: 1.5; }
+.setup-item-text strong { color: var(--txt); }
+.setup-note {
+    text-align: center; color: var(--muted); font-size: 14px;
+    margin-top: 20px; max-width: 600px;
+    margin-left: auto; margin-right: auto;
+}
+
+.pricing-wrap { max-width: 500px; margin: 0 auto; }
+.pricing-card {
+    background: linear-gradient(160deg, var(--card2), var(--card));
+    border: 2px solid var(--accent); border-radius: 24px;
+    padding: 44px 32px; text-align: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 64px rgba(79, 124, 255, 0.2);
+}
+.pricing-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--gold), #ff6b1a, var(--accent2));
+}
+.pricing-badge {
+    display: inline-block; padding: 6px 14px;
+    background: rgba(255, 184, 77, 0.15);
+    border: 1px solid rgba(255, 184, 77, 0.4);
+    color: var(--gold); border-radius: 20px;
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 20px;
+}
+.pricing-price {
+    font-size: 68px; font-weight: 900; color: var(--gold);
+    line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -2px;
+}
+.pricing-price::before {
+    content: '\20A6'; font-size: 36px;
+    vertical-align: top; margin-right: 4px;
+}
+.pricing-label {
+    font-size: 14px; color: var(--muted); font-weight: 600;
+    margin-top: 8px; margin-bottom: 30px;
+}
+.pricing-features { list-style: none; text-align: left; margin-bottom: 32px; display: grid; gap: 12px; }
+.pricing-features li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 14px; color: var(--txt); line-height: 1.5;
+}
+.pricing-features li::before {
+    content: '\2713'; width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(37, 208, 122, 0.15); color: var(--good);
+    display: grid; place-items: center; font-weight: 900;
+    font-size: 12px; flex-shrink: 0; margin-top: 1px;
+}
+.pricing-cta { width: 100%; padding: 17px; font-size: 16px; justify-content: center; }
+.pricing-footnote {
+    text-align: center; font-size: 12.5px; color: var(--muted);
+    margin-top: 20px; line-height: 1.5;
+}
+
+.faq-list { max-width: 780px; margin: 0 auto; }
+.faq-item {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; margin-bottom: 12px;
+    overflow: hidden; transition: border-color 0.2s;
+}
+.faq-item.open { border-color: var(--accent); }
+.faq-q {
+    padding: 20px 24px; display: flex; justify-content: space-between;
+    align-items: center; gap: 16px; cursor: pointer;
+    font-weight: 700; font-size: 15px; line-height: 1.4; user-select: none;
+}
+.faq-q::after {
+    content: '+'; font-size: 24px; font-weight: 300;
+    color: var(--accent); transition: transform 0.2s; flex-shrink: 0;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+.faq-item.open .faq-a { max-height: 500px; }
+.faq-a-inner { padding: 0 24px 22px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+
+.contact-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+.contact-card {
+    background: linear-gradient(160deg, var(--card2), var(--card));
+    border: 1px solid var(--line); border-radius: 22px;
+    padding: 40px 32px; margin-top: 32px;
+}
+.contact-name { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.contact-role {
+    font-size: 13px; color: var(--muted); font-weight: 600;
+    letter-spacing: 0.5px; margin-bottom: 28px;
+}
+.contact-rows { display: grid; gap: 12px; text-align: left; }
+.contact-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; background: var(--field);
+    border: 1px solid var(--line); border-radius: 12px;
+    text-decoration: none; color: var(--txt);
+    transition: border-color 0.15s;
+}
+.contact-row:hover { border-color: var(--accent); }
+.contact-row-icon {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, rgba(79, 124, 255, 0.15), rgba(139, 92, 246, 0.1));
+    border: 1px solid rgba(79, 124, 255, 0.3);
+    display: grid; place-items: center; font-size: 16px; flex-shrink: 0;
+}
+.contact-row-label {
+    font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1px; font-weight: 700;
+}
+.contact-row-value { font-size: 14.5px; font-weight: 700; margin-top: 2px; word-break: break-all; }
+
+footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background: var(--field); }
+.footer-inner {
+    max-width: 1080px; margin: 0 auto; display: flex;
+    justify-content: space-between; align-items: center;
+    gap: 24px; flex-wrap: wrap;
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; }
+.footer-brand svg { width: 28px; height: 28px; border-radius: 8px; }
+.footer-copy { font-size: 12.5px; color: var(--muted); line-height: 1.5; text-align: right; }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 600; }
+.footer-links a:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .levels-grid { grid-template-columns: repeat(2, 1fr); }
+    .problem-grid { grid-template-columns: 1fr; gap: 32px; }
+    .audience-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+    .nav-links { display: none; }
+    .hamburger { display: grid; place-items: center; }
+    section { padding: 60px 18px; }
+    .hero { padding-top: 40px; padding-bottom: 60px; }
+    .hero-stats { gap: 32px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .levels-grid { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-copy { text-align: center; }
+    .pricing-card { padding: 36px 24px; }
+    .pricing-price { font-size: 56px; }
+    .contact-card { padding: 32px 22px; }
+    .demo-points { grid-template-columns: 1fr; }
+    .cta-card { flex-direction: column; text-align: center; }
+    .cta-arrow { display: none; }
+}
+@media (max-width: 420px) {
+    .hero-ctas { flex-direction: column; }
+    .hero-ctas .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <a href="#top" class="nav-logo">
+            <svg viewBox="0 0 512 512" aria-hidden="true">
+                <defs>
+                    <linearGradient id="boltGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#fff08a"/>
+                        <stop offset="45%" stop-color="#ffb84d"/>
+                        <stop offset="100%" stop-color="#ff6b1a"/>
+                    </linearGradient>
+                </defs>
+                <rect width="512" height="512" rx="112" fill="#121a38"/>
+                <path d="M 108 152 L 404 152 L 404 260 C 404 340 340 400 256 448 C 172 400 108 340 108 260 Z" fill="white"/>
+                <path d="M 310 130 L 180 290 L 244 290 L 200 402 L 330 244 L 270 244 Z" fill="url(#boltGrad)"/>
+            </svg>
+            <span class="nav-logo-text">StormLok</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how">How It Works</a>
+            <a href="#demo">Demo</a>
+            <a href="/storyboard.html">Storyboard</a>
+            <a href="/guide.html">Guide</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact" class="nav-cta">Contact</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="#demo">Demo</a>
+    <a href="/storyboard.html">🎬 Storyboard</a>
+    <a href="/guide.html">📖 Get Started Guide</a>
+    <a href="#audience">Who It's For</a>
+    <a href="#setup">Setup</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<section class="hero" id="top">
+    <div class="container">
+        <svg class="hero-icon" viewBox="0 0 512 512" aria-hidden="true">
+            <defs>
+                <linearGradient id="heroBolt" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#fff08a"/>
+                    <stop offset="45%" stop-color="#ffb84d"/>
+                    <stop offset="100%" stop-color="#ff6b1a"/>
+                </linearGradient>
+                <radialGradient id="heroBg" cx="50%" cy="30%" r="80%">
+                    <stop offset="0%" stop-color="#1e2c58"/>
+                    <stop offset="45%" stop-color="#121a38"/>
+                    <stop offset="100%" stop-color="#070a14"/>
+                </radialGradient>
+            </defs>
+            <rect width="512" height="512" rx="112" fill="url(#heroBg)"/>
+            <path d="M 108 152 L 404 152 L 404 260 C 404 340 340 400 256 448 C 172 400 108 340 108 260 Z" fill="white"/>
+            <path d="M 310 130 L 180 290 L 244 290 L 200 402 L 330 244 L 270 244 Z" fill="url(#heroBolt)"/>
+        </svg>
+
+        <h1 class="hero-title">Your solar system's<br>first line of defence.</h1>
+        <p class="hero-sub">StormLok watches the sky, tracks live lightning strikes, and rings a real alarm on your phone before a strike can damage your solar investment.</p>
+
+        <div class="hero-ctas">
+            <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20get%20StormLok%20for%20my%20solar%20system" class="btn btn-primary" target="_blank" rel="noopener">Get StormLok &mdash; &#8358;2,500</a>
+            <a href="/guide.html" class="btn btn-secondary">📖 Read the guide</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-num">5 min</div>
+                <div class="hero-stat-label">Check interval</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">20 km</div>
+                <div class="hero-stat-label">Strike override</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">30 min</div>
+                <div class="hero-stat-label">Safety hold</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">&#8358;0</div>
+                <div class="hero-stat-label">Monthly fee</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="problem">
+    <div class="container">
+        <div class="problem-grid">
+            <div class="problem-text">
+                <div class="eyebrow">The Problem</div>
+                <h2 class="section-title">Lightning doesn't have to hit your panels to destroy them.</h2>
+                <p>A strike within a few kilometres creates a surge of electricity that travels down your DC cables and hits your inverter, charge controller, and battery in <strong>microseconds</strong>.</p>
+                <p>By the time you see the flash or hear the thunder, the damage is already done. Standard home insurance in Nigeria rarely covers solar equipment &mdash; and claims take months to settle.</p>
+                <p>Every rainy season, thousands of Nigerian families lose their systems this way. Most of them had no warning.</p>
+            </div>
+            <div class="problem-stats">
+                <div class="problem-stat">
+                    <div class="problem-stat-label">Typical home solar setup</div>
+                    <div class="problem-stat-value">&#8358;1.5M &ndash; &#8358;5M</div>
+                    <div class="problem-stat-desc">Total investment at risk</div>
+                </div>
+                <div class="problem-stat">
+                    <div class="problem-stat-label">Cost of one bad storm</div>
+                    <div class="problem-stat-value">&#8358;800K &ndash; &#8358;2.5M</div>
+                    <div class="problem-stat-desc">Repairs and replacements</div>
+                </div>
+                <div class="problem-stat">
+                    <div class="problem-stat-label">Insurance coverage</div>
+                    <div class="problem-stat-value">Usually none</div>
+                    <div class="problem-stat-desc">Solar equipment is rarely covered</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features">
+    <div class="container">
+        <div class="eyebrow">Features</div>
+        <h2 class="section-title">Built for the moment it matters.</h2>
+        <p class="section-sub">Every feature in StormLok exists to serve one purpose: warn you early enough to disconnect before the strike lands.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">&#9889;</div>
+                <div class="feature-title">Live Lightning Detection</div>
+                <div class="feature-desc">Connected to Xweather's global detection network. Every confirmed strike in Africa, reported within seconds.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128202;</div>
+                <div class="feature-title">Score-Based Risk Engine</div>
+                <div class="feature-desc">Nine separate signals combined into a single transparent risk score from 0 to 210. You see exactly what's driving it.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128680;</div>
+                <div class="feature-title">Loud Alarm When Locked</div>
+                <div class="feature-desc">Rings through your phone's notification system &mdash; not just inside the app. Works even when the screen is off.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128205;</div>
+                <div class="feature-title">Fixed Site Location</div>
+                <div class="feature-desc">Set your solar site once. It monitors that spot forever, even if you travel. Saves battery. Removes confusion.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128337;</div>
+                <div class="feature-title">30-Minute Safety Hold</div>
+                <div class="feature-desc">After the last nearby strike, StormLok holds the alert for 30 minutes &mdash; matching the fire service standard.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128220;</div>
+                <div class="feature-title">Live Analysis in Plain English</div>
+                <div class="feature-desc">Not just numbers. Every check explains in one sentence why the risk is rising or falling.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128200;</div>
+                <div class="feature-title">CAPE Sparkline</div>
+                <div class="feature-desc">See the day's thunderstorm energy building in a live graph. Peak CAPE saved for reference.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128220;</div>
+                <div class="feature-title">Event History</div>
+                <div class="feature-desc">Every stage change is logged. Look back after a storm and see exactly what happened.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128274;</div>
+                <div class="feature-title">Private by Design</div>
+                <div class="feature-desc">Everything lives on your phone. No servers. No accounts. Uninstall and it's gone.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="how" style="background: var(--field);">
+    <div class="container">
+        <div class="eyebrow">How It Works</div>
+        <h2 class="section-title">Four steps. Five minutes.</h2>
+        <p class="section-sub">No complicated setup. No account creation. The app does the work on your phone.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-title">Watches the Atmosphere</div>
+                <div class="step-desc">Pulls real-time CAPE, rain, and cloud data from Open-Meteo for your exact solar site.</div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-title">Tracks Live Strikes</div>
+                <div class="step-desc">Queries Xweather for every confirmed lightning strike within your alert radius in the last 10 minutes.</div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-title">Calculates the Risk</div>
+                <div class="step-desc">Combines nine signals into a single risk score. A close strike forces the alert up, no matter what.</div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-title">Rings the Alarm</div>
+                <div class="step-desc">When the risk is high enough, your phone rings. Loud. Repeated. Impossible to miss.</div>
+            </div>
+        </div>
+
+        <div class="levels-grid">
+            <div class="level level-clear">
+                <div class="level-name">All Clear</div>
+                <div class="level-score">Score 0 &ndash; 24</div>
+                <div class="level-desc">Nothing significant on any sensor. Solar can stay connected.</div>
+            </div>
+            <div class="level level-building">
+                <div class="level-name">Building</div>
+                <div class="level-score">Score 25 &ndash; 54</div>
+                <div class="level-desc">Energy is loading in the atmosphere. Watch the sky.</div>
+            </div>
+            <div class="level level-active">
+                <div class="level-name">Active</div>
+                <div class="level-score">Score 55 &ndash; 94</div>
+                <div class="level-desc">Rain or nearby strikes. Prepare to disconnect.</div>
+            </div>
+            <div class="level level-imminent">
+                <div class="level-name">Imminent</div>
+                <div class="level-score">Score 95+</div>
+                <div class="level-desc">Strike within 20 km. Disconnect now.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section id="demo">
+    <div class="container">
+        <div class="eyebrow" style="text-align: center;">See It In Action</div>
+        <h2 class="section-title" style="text-align: center;">60-second demo.</h2>
+        <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">Watch StormLok detect a real thunderstorm, sound the alarm, and hold the alert for 30 minutes after the last strike.</p>
+
+        <a href="/storyboard.html" class="cta-card">
+            <div class="cta-icon">🎬</div>
+            <div class="cta-body">
+                <div class="cta-label">Behind the Scenes</div>
+                <div class="cta-title">View the full demo storyboard</div>
+                <div class="cta-desc">7 animated scenes · Setup, Xweather API, alarm test, background lock</div>
+            </div>
+            <div class="cta-arrow">→</div>
+        </a>
+
+        <div class="video-wrap">
+            <a href="/storyboard.html" class="video-frame" aria-label="View storyboard">
+                <div class="video-placeholder">
+                    <div class="video-play-icon">▶</div>
+                    <div class="video-placeholder-title">Demo Video Coming Soon</div>
+                    <div class="video-placeholder-sub">Tap to preview the storyboard &mdash; the full video is being recorded</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="demo-points">
+            <div class="demo-point">
+                <div class="demo-point-icon">⚡</div>
+                <div class="demo-point-text">Detects strikes within 40 km</div>
+            </div>
+            <div class="demo-point">
+                <div class="demo-point-icon">🔔</div>
+                <div class="demo-point-text">Rings even when locked</div>
+            </div>
+            <div class="demo-point">
+                <div class="demo-point-icon">⏱️</div>
+                <div class="demo-point-text">30-minute safety hold</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="audience">
+    <div class="container">
+        <div class="eyebrow">Who It's For</div>
+        <h2 class="section-title">Made for anyone with solar to protect.</h2>
+        <p class="section-sub">If your solar system cost more than you'd like to lose, StormLok is for you.</p>
+
+        <div class="audience-grid">
+            <div class="audience-card">
+                <div class="audience-icon">&#127968;</div>
+                <div>
+                    <div class="audience-title">Home Solar Owners</div>
+                    <div class="audience-desc">Protect your investment without paying for an SPD installation. The app gives you the warning. You make the decision.</div>
+                </div>
+            </div>
+            <div class="audience-card">
+                <div class="audience-icon">&#128295;</div>
+                <div>
+                    <div class="audience-title">Solar Installers</div>
+                    <div class="audience-desc">Offer a premium add-on that protects your reputation and reduces after-sales support calls. Earn commission on every install.</div>
+                </div>
+            </div>
+            <div class="audience-card">
+                <div class="audience-icon">&#127970;</div>
+                <div>
+                    <div class="audience-title">Small Businesses</div>
+                    <div class="audience-desc">Shops, clinics, schools, farms. Any operation that depends on solar power deserves protection against the storm.</div>
+                </div>
+            </div>
+            <div class="audience-card">
+                <div class="audience-icon">&#127756;</div>
+                <div>
+                    <div class="audience-title">Anyone in Southern Nigeria</div>
+                    <div class="audience-desc">Where thunderstorms are frequent from April through October, StormLok is peace of mind in a pocket.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="setup" style="background: var(--field);">
+    <div class="container">
+        <div class="eyebrow">Setup</div>
+        <h2 class="section-title" style="text-align: center;">Ready in five minutes.</h2>
+        <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">Your installer can also do this for you during the installation visit.</p>
+
+        <div class="setup-list">
+            <div class="setup-item">
+                <div class="setup-item-num">1</div>
+                <div class="setup-item-text">Install the <strong>StormLok APK</strong> on your Android phone.</div>
+            </div>
+            <div class="setup-item">
+                <div class="setup-item-num">2</div>
+                <div class="setup-item-text">Input your <strong>License Key (STLK-XXXXXX-XXXXXX)</strong> into the <strong>"Unlock StormLok"</strong> Section and tap <strong>Activate</strong>.</div>
+            </div>
+            <div class="setup-item">
+                <div class="setup-item-num">3</div>
+                <div class="setup-item-text">Open StormLok and tap <strong>Start Protection</strong>.</div>
+            </div>
+            <div class="setup-item">
+                <div class="setup-item-num">4</div>
+                <div class="setup-item-text">Grant <strong>Location</strong> and <strong>Notification</strong> permissions when prompted.</div>
+            </div>
+            <div class="setup-item">
+                <div class="setup-item-num">5</div>
+                <div class="setup-item-text">Update <strong>Android System WebView</strong> from the Play Store if the app asks.</div>
+            </div>
+            <div class="setup-item">
+                <div class="setup-item-num">6</div>
+                <div class="setup-item-text">Tap the <strong>gear icon</strong> and paste your Xweather credentials.</div>
+            </div>
+            <div class="setup-item">
+                <div class="setup-item-num">7</div>
+                <div class="setup-item-text">Set your <strong>alert radius</strong> (30 km recommended for systems without SPD).</div>
+            </div>
+            <div class="setup-item">
+                <div class="setup-item-num">8</div>
+                <div class="setup-item-text">(Optional) Tick <strong>"Use a fixed site location"</strong> to save battery and lock monitoring to your solar site.</div>
+            </div>
+        </div>
+
+        <a href="/guide.html" class="cta-card gold">
+            <div class="cta-icon">📖</div>
+            <div class="cta-body">
+                <div class="cta-label">Full Documentation</div>
+                <div class="cta-title">Read the complete Get Started Guide</div>
+                <div class="cta-desc">10 detailed sections · Alarm response · Battery optimization for Tecno, Infinix, Samsung &amp; Xiaomi</div>
+            </div>
+            <div class="cta-arrow">→</div>
+        </a>
+
+        <p class="setup-note">The app is now monitoring. It will check every five minutes and ring the alarm when the sky turns dangerous.</p>
+    </div>
+</section>
+
+<section id="pricing">
+    <div class="container">
+        <div class="eyebrow" style="text-align: center;">Pricing</div>
+        <h2 class="section-title" style="text-align: center;">One payment. Lifetime protection.</h2>
+        <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">No subscriptions. No hidden fees. No monthly costs. Just a simple, honest price.</p>
+
+        <div class="pricing-wrap">
+            <div class="pricing-card">
+                <div class="pricing-badge">Complete Access</div>
+                <div class="pricing-price">2,500</div>
+                <div class="pricing-label">One-time payment &middot; Nigerian Naira</div>
+
+                <ul class="pricing-features">
+                    <li>Real-time CAPE and weather monitoring</li>
+                    <li>Live lightning strike tracking</li>
+                    <li>Loud alarm that works when phone is locked</li>
+                    <li>30-minute safety hold after last strike</li>
+                    <li>Fixed site location (saves battery)</li>
+                    <li>CAPE sparkline and event history</li>
+                    <li>Free updates for the life of your phone</li>
+                </ul>
+
+                <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20get%20StormLok%20for%20my%20solar%20system" class="btn btn-primary pricing-cta" target="_blank" rel="noopener">Get StormLok</a>
+
+                <div class="pricing-footnote">
+                    Or ask your solar installer to bundle StormLok with your next installation or service call.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq" style="background: var(--field);">
+    <div class="container">
+        <div class="eyebrow" style="text-align: center;">Frequently Asked</div>
+        <h2 class="section-title" style="text-align: center;">Answers to common questions.</h2>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-q">Do I need internet for StormLok to work?</div>
+                <div class="faq-a"><div class="faq-a-inner">You need internet for the app to fetch weather and lightning data. The alert system and the alarm work entirely on your phone, but the weather data comes from online sources. If you lose internet during a storm, the app keeps showing the last reading.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What happens if my Xweather key stops working?</div>
+                <div class="faq-a"><div class="faq-a-inner">Contact your installer or the developer. The key can be reset in a few minutes and re-entered. Your app settings and history are preserved.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Will the alarm wake me up at night?</div>
+                <div class="faq-a"><div class="faq-a-inner">Yes. StormLok uses your phone's notification system, which fires even when the screen is locked or the app is in the background. That's the point &mdash; storms don't schedule themselves for convenient hours.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Does it work on iPhone?</div>
+                <div class="faq-a"><div class="faq-a-inner">Not currently. StormLok is built for Android. An iOS version is under consideration for the future.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">How accurate is the lightning data?</div>
+                <div class="faq-a"><div class="faq-a-inner">StormLok uses Xweather's professional-grade detection network, which covers the whole of Africa. Every confirmed strike is reported with its distance and age.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can I use it on multiple phones?</div>
+                <div class="faq-a"><div class="faq-a-inner">Yes. Install StormLok on any phone the app is licensed for. Each phone gets its own Xweather account so nothing is shared.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What if I change phones?</div>
+                <div class="faq-a"><div class="faq-a-inner">Your installer or the developer can help you move StormLok to your new phone. Your Xweather key stays valid &mdash; you just re-enter it.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Does StormLok work if my phone is on silent?</div>
+                <div class="faq-a"><div class="faq-a-inner">The alarm uses your phone's notification sound. If your phone is on silent, the alarm will be muted too &mdash; but the vibration and the flashing screen still work. For best results, leave your phone on sound during storm season.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Is it a replacement for physical surge protection?</div>
+                <div class="faq-a"><div class="faq-a-inner">No. StormLok is an early-warning tool. A proper surge protection device (SPD) and earthing are still the best defence. StormLok complements them by giving you time to disconnect manually &mdash; which is critical for systems without an SPD.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Where is my data stored?</div>
+                <div class="faq-a"><div class="faq-a-inner">Everything lives on your phone. Location, Xweather key, readings, and event history are all stored locally. Nothing is uploaded to any server operated by StormLok or the developer.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="contact-wrap">
+            <div class="eyebrow" style="text-align: center;">Get In Touch</div>
+            <h2 class="section-title" style="text-align: center;">Ready to protect your solar?</h2>
+            <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">Reach out directly. Whether you're a solar owner, an installer looking to partner, or just curious &mdash; I'd like to hear from you.</p>
+
+            <div class="contact-card">
+                <div class="contact-name">Henry Ufuoma Ogboru</div>
+                <div class="contact-role">Developer &middot; StormLok</div>
+
+                <div class="contact-rows">
+                    <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20StormLok" class="contact-row" target="_blank" rel="noopener">
+                        <div class="contact-row-icon">&#128241;</div>
+                        <div>
+                            <div class="contact-row-label">WhatsApp</div>
+                            <div class="contact-row-value">+234 703 859 2640</div>
+                        </div>
+                    </a>
+                    <a href="tel:+2347038592640" class="contact-row">
+                        <div class="contact-row-icon">&#128222;</div>
+                        <div>
+                            <div class="contact-row-label">Phone</div>
+                            <div class="contact-row-value">+234 703 859 2640</div>
+                        </div>
+                    </a>
+                    <a href="mailto:stormlok.ng@gmail.com" class="contact-row">
+                        <div class="contact-row-icon">&#9993;</div>
+                        <div>
+                            <div class="contact-row-label">Email</div>
+                            <div class="contact-row-value">stormlok.ng@gmail.com</div>
+                        </div>
+                    </a>
+                    <div class="contact-row">
+                        <div class="contact-row-icon">&#128205;</div>
+                        <div>
+                            <div class="contact-row-label">Location</div>
+                            <div class="contact-row-value">Asaba, Nigeria</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <svg viewBox="0 0 512 512" aria-hidden="true">
+                <defs>
+                    <linearGradient id="footBolt" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#fff08a"/>
+                        <stop offset="45%" stop-color="#ffb84d"/>
+                        <stop offset="100%" stop-color="#ff6b1a"/>
+                    </linearGradient>
+                </defs>
+                <rect width="512" height="512" rx="112" fill="#121a38"/>
+                <path d="M 108 152 L 404 152 L 404 260 C 404 340 340 400 256 448 C 172 400 108 340 108 260 Z" fill="white"/>
+                <path d="M 310 130 L 180 290 L 244 290 L 200 402 L 330 244 L 270 244 Z" fill="url(#footBolt)"/>
+            </svg>
+            StormLok
+        </div>
+        <div class="footer-links">
+            <a href="#features">Features</a>
+            <a href="#demo">Demo</a>
+            <a href="/storyboard.html">Storyboard</a>
+            <a href="/guide.html">Guide</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 Henry Ufuoma Ogboru.<br>All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    hamburger.innerHTML = mobileMenu.classList.contains('open') ? '&times;' : '&#9776;';
+});
+
+mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.innerHTML = '&#9776;';
+    });
+});
+
+document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({ top, behavior: 'smooth' });
+    });
+});
+</script>
+
+</body>
+</html>
