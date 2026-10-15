@@ -229,100 +229,68 @@ h1.hero-title {
 .level-score { font-size: 13px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
 .level-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
 
-/* ============ DEMO VIDEO ============ */
-.video-wrap {
-    max-width: 780px;
-    margin: 0 auto 40px;
-}
+.video-wrap { max-width: 780px; margin: 0 auto 40px; }
 .video-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
-    border-radius: 20px;
-    overflow: hidden;
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    background: #000; border-radius: 20px; overflow: hidden;
     border: 2px solid var(--line);
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(79, 124, 255, 0.15);
     transition: transform 0.2s, border-color 0.2s;
-    text-decoration: none;
-    display: block;
+    text-decoration: none; display: block;
 }
-.video-frame:hover {
-    transform: translateY(-3px);
-    border-color: var(--accent);
-}
+.video-frame:hover { transform: translateY(-3px); border-color: var(--accent); }
 .video-frame iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
 }
 .video-placeholder {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
     gap: 10px;
     background:
         radial-gradient(ellipse 500px 300px at 50% 50%, rgba(79, 124, 255, 0.15), transparent 70%),
         linear-gradient(135deg, #0f1428, #151a2e);
-    text-align: center;
-    padding: 24px;
+    text-align: center; padding: 24px;
 }
 .video-play-icon {
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
+    width: 76px; height: 76px; border-radius: 50%;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: white;
-    font-size: 26px;
-    display: grid;
-    place-items: center;
+    color: white; font-size: 26px; display: grid; place-items: center;
     box-shadow: 0 12px 36px rgba(79, 124, 255, 0.5);
-    padding-left: 6px;
-    margin-bottom: 8px;
+    padding-left: 6px; margin-bottom: 8px;
     animation: pulsePlay 2.4s ease-in-out infinite;
 }
 @keyframes pulsePlay {
     0%, 100% { transform: scale(1); box-shadow: 0 12px 36px rgba(79, 124, 255, 0.5); }
     50% { transform: scale(1.06); box-shadow: 0 16px 48px rgba(79, 124, 255, 0.7); }
 }
-.video-placeholder-title {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--txt);
-}
+.video-placeholder-title { font-size: 20px; font-weight: 800; color: var(--txt); }
 .video-placeholder-sub {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 600;
-    max-width: 340px;
+    font-size: 13px; color: var(--muted); font-weight: 600; max-width: 340px;
 }
 
-/* ============ STORYBOARD CTA ============ */
-.storyboard-cta {
-    max-width: 780px;
-    margin: 0 auto 32px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
+.cta-card {
+    max-width: 780px; margin: 0 auto 32px;
+    display: flex; align-items: center; gap: 18px;
     padding: 22px 26px;
     background: linear-gradient(135deg, rgba(79, 124, 255, 0.12), rgba(139, 92, 246, 0.08));
     border: 1.5px solid rgba(79, 124, 255, 0.35);
-    border-radius: 18px;
-    text-decoration: none;
-    color: var(--txt);
+    border-radius: 18px; text-decoration: none; color: var(--txt);
     transition: all 0.18s;
 }
-.storyboard-cta:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
+.cta-card:hover {
+    border-color: var(--accent); transform: translateY(-2px);
     box-shadow: 0 12px 32px rgba(79, 124, 255, 0.2);
 }
-.storyboard-cta-icon {
+.cta-card.gold {
+    background: linear-gradient(135deg, rgba(255, 184, 77, 0.12), rgba(255, 107, 26, 0.08));
+    border-color: rgba(255, 184, 77, 0.4);
+}
+.cta-card.gold:hover {
+    border-color: var(--gold);
+    box-shadow: 0 12px 32px rgba(255, 184, 77, 0.2);
+}
+.cta-icon {
     width: 54px; height: 54px; flex-shrink: 0;
     border-radius: 14px;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -330,57 +298,43 @@ h1.hero-title {
     font-size: 24px; color: white;
     box-shadow: 0 8px 24px rgba(79, 124, 255, 0.4);
 }
-.storyboard-cta-body { flex: 1; min-width: 0; }
-.storyboard-cta-label {
-    font-size: 11px; letter-spacing: 1.6px;
-    text-transform: uppercase; color: var(--accent);
-    font-weight: 800; margin-bottom: 4px;
+.cta-card.gold .cta-icon {
+    background: linear-gradient(135deg, var(--gold), #ff6b1a);
+    box-shadow: 0 8px 24px rgba(255, 184, 77, 0.4);
 }
-.storyboard-cta-title {
+.cta-body { flex: 1; min-width: 0; }
+.cta-label {
+    font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--accent); font-weight: 800; margin-bottom: 4px;
+}
+.cta-card.gold .cta-label { color: var(--gold); }
+.cta-title {
     font-size: 16px; font-weight: 800; color: var(--txt);
     margin-bottom: 3px; line-height: 1.3;
 }
-.storyboard-cta-desc {
-    font-size: 13px; color: var(--muted); line-height: 1.5;
-}
-.storyboard-cta-arrow {
+.cta-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.cta-arrow {
     font-size: 22px; color: var(--accent);
     flex-shrink: 0; font-weight: 800;
     transition: transform 0.18s;
 }
-.storyboard-cta:hover .storyboard-cta-arrow {
-    transform: translateX(4px);
-}
+.cta-card.gold .cta-arrow { color: var(--gold); }
+.cta-card:hover .cta-arrow { transform: translateX(4px); }
 
 .demo-points {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    max-width: 780px;
-    margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; max-width: 780px; margin: 0 auto;
 }
 .demo-point {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 18px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 16px;
+    display: flex; align-items: center; gap: 12px;
     transition: border-color 0.15s;
 }
-.demo-point:hover {
-    border-color: var(--accent);
-}
-.demo-point-icon {
-    font-size: 22px;
-    flex-shrink: 0;
-}
+.demo-point:hover { border-color: var(--accent); }
+.demo-point-icon { font-size: 22px; flex-shrink: 0; }
 .demo-point-text {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--txt);
-    line-height: 1.35;
+    font-size: 13.5px; font-weight: 700; color: var(--txt); line-height: 1.35;
 }
 
 .audience-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
@@ -399,7 +353,7 @@ h1.hero-title {
 .audience-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
 .audience-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
 
-.setup-list { display: grid; gap: 12px; max-width: 720px; margin: 0 auto; }
+.setup-list { display: grid; gap: 12px; max-width: 720px; margin: 0 auto 24px; }
 .setup-item {
     background: var(--card); border: 1px solid var(--line);
     border-radius: 14px; padding: 18px 22px;
@@ -415,7 +369,7 @@ h1.hero-title {
 .setup-item-text strong { color: var(--txt); }
 .setup-note {
     text-align: center; color: var(--muted); font-size: 14px;
-    margin-top: 28px; max-width: 600px;
+    margin-top: 20px; max-width: 600px;
     margin-left: auto; margin-right: auto;
 }
 
@@ -556,8 +510,8 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
     .pricing-price { font-size: 56px; }
     .contact-card { padding: 32px 22px; }
     .demo-points { grid-template-columns: 1fr; }
-    .storyboard-cta { flex-direction: column; text-align: center; }
-    .storyboard-cta-arrow { display: none; }
+    .cta-card { flex-direction: column; text-align: center; }
+    .cta-arrow { display: none; }
 }
 @media (max-width: 420px) {
     .hero-ctas { flex-direction: column; }
@@ -590,7 +544,7 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
             <a href="#how">How It Works</a>
             <a href="#demo">Demo</a>
             <a href="/storyboard.html">Storyboard</a>
-            <a href="#audience">Who It's For</a>
+            <a href="/guide.html">Guide</a>
             <a href="#pricing">Pricing</a>
             <a href="#faq">FAQ</a>
             <a href="#contact" class="nav-cta">Contact</a>
@@ -605,6 +559,7 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
     <a href="#how">How It Works</a>
     <a href="#demo">Demo</a>
     <a href="/storyboard.html">🎬 Storyboard</a>
+    <a href="/guide.html">📖 Get Started Guide</a>
     <a href="#audience">Who It's For</a>
     <a href="#setup">Setup</a>
     <a href="#pricing">Pricing</a>
@@ -637,7 +592,7 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
 
         <div class="hero-ctas">
             <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20get%20StormLok%20for%20my%20solar%20system" class="btn btn-primary" target="_blank" rel="noopener">Get StormLok &mdash; &#8358;2,500</a>
-            <a href="#how" class="btn btn-secondary">How it works</a>
+            <a href="/guide.html" class="btn btn-secondary">📖 Read the guide</a>
         </div>
 
         <div class="hero-stats">
@@ -802,45 +757,29 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
     </div>
 </section>
 
-<!-- ============ DEMO ============ -->
 <section id="demo">
     <div class="container">
         <div class="eyebrow" style="text-align: center;">See It In Action</div>
         <h2 class="section-title" style="text-align: center;">60-second demo.</h2>
         <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">Watch StormLok detect a real thunderstorm, sound the alarm, and hold the alert for 30 minutes after the last strike.</p>
 
-        <!-- ── Storyboard CTA ── -->
-        <a href="/storyboard.html" class="storyboard-cta">
-            <div class="storyboard-cta-icon">🎬</div>
-            <div class="storyboard-cta-body">
-                <div class="storyboard-cta-label">Behind the Scenes</div>
-                <div class="storyboard-cta-title">View the full demo storyboard</div>
-                <div class="storyboard-cta-desc">7 animated scenes · Setup, Xweather API, alarm test, background lock</div>
+        <a href="/storyboard.html" class="cta-card">
+            <div class="cta-icon">🎬</div>
+            <div class="cta-body">
+                <div class="cta-label">Behind the Scenes</div>
+                <div class="cta-title">View the full demo storyboard</div>
+                <div class="cta-desc">7 animated scenes · Setup, Xweather API, alarm test, background lock</div>
             </div>
-            <div class="storyboard-cta-arrow">→</div>
+            <div class="cta-arrow">→</div>
         </a>
 
         <div class="video-wrap">
-            <!-- Replace VIDEO_ID_HERE with your YouTube video ID when the video is ready -->
             <a href="/storyboard.html" class="video-frame" aria-label="View storyboard">
                 <div class="video-placeholder">
                     <div class="video-play-icon">▶</div>
                     <div class="video-placeholder-title">Demo Video Coming Soon</div>
                     <div class="video-placeholder-sub">Tap to preview the storyboard &mdash; the full video is being recorded</div>
                 </div>
-                <!--
-                    Once you have the video, DELETE the .video-placeholder block above
-                    and the outer <a> wrapper, then UNCOMMENT the iframe below.
-                    Change VIDEO_ID_HERE to your video ID.
-
-                    <iframe
-                        src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
-                        title="StormLok Demo"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                -->
             </a>
         </div>
 
@@ -911,11 +850,10 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
                 <div class="setup-item-num">1</div>
                 <div class="setup-item-text">Install the <strong>StormLok APK</strong> on your Android phone.</div>
             </div>
-	    <div class="setup-item">
+            <div class="setup-item">
                 <div class="setup-item-num">2</div>
                 <div class="setup-item-text">Input your <strong>License Key (STLK-XXXXXX-XXXXXX)</strong> into the <strong>"Unlock StormLok"</strong> Section and tap <strong>Activate</strong>.</div>
             </div>
-
             <div class="setup-item">
                 <div class="setup-item-num">3</div>
                 <div class="setup-item-text">Open StormLok and tap <strong>Start Protection</strong>.</div>
@@ -941,6 +879,16 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
                 <div class="setup-item-text">(Optional) Tick <strong>"Use a fixed site location"</strong> to save battery and lock monitoring to your solar site.</div>
             </div>
         </div>
+
+        <a href="/guide.html" class="cta-card gold">
+            <div class="cta-icon">📖</div>
+            <div class="cta-body">
+                <div class="cta-label">Full Documentation</div>
+                <div class="cta-title">Read the complete Get Started Guide</div>
+                <div class="cta-desc">10 detailed sections · Alarm response · Battery optimization for Tecno, Infinix, Samsung &amp; Xiaomi</div>
+            </div>
+            <div class="cta-arrow">→</div>
+        </a>
 
         <p class="setup-note">The app is now monitoring. It will check every five minutes and ring the alarm when the sky turns dangerous.</p>
     </div>
@@ -1095,6 +1043,7 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
             <a href="#features">Features</a>
             <a href="#demo">Demo</a>
             <a href="/storyboard.html">Storyboard</a>
+            <a href="/guide.html">Guide</a>
             <a href="#pricing">Pricing</a>
             <a href="#faq">FAQ</a>
             <a href="#contact">Contact</a>
