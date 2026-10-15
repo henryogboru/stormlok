@@ -138,6 +138,11 @@ h1.hero-title {
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(79, 124, 255, 0.5); }
 .btn-secondary { background: var(--card); color: var(--txt); border: 1px solid var(--line); }
 .btn-secondary:hover { background: var(--card2); border-color: var(--accent); }
+.btn-gold {
+    background: linear-gradient(135deg, var(--gold), #ff6b1a);
+    color: #1a0e00; box-shadow: 0 8px 24px rgba(255, 184, 77, 0.35);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 184, 77, 0.5); }
 .hero-stats {
     display: flex; justify-content: center; gap: 48px;
     flex-wrap: wrap; margin-top: 40px;
@@ -320,6 +325,65 @@ h1.hero-title {
 }
 .cta-card.gold .cta-arrow { color: var(--gold); }
 .cta-card:hover .cta-arrow { transform: translateX(4px); }
+
+/* ============ DOWNLOAD SECTION ============ */
+.download-card {
+    max-width: 640px; margin: 0 auto 28px;
+    background: linear-gradient(160deg, var(--card2), var(--card));
+    border: 2px solid rgba(79, 124, 255, 0.4);
+    border-radius: 22px; padding: 32px 28px;
+    display: flex; align-items: center; gap: 22px;
+    box-shadow: 0 20px 60px rgba(79, 124, 255, 0.15);
+}
+.download-icon {
+    width: 72px; height: 72px; flex-shrink: 0;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: grid; place-items: center;
+    font-size: 36px; color: white;
+    box-shadow: 0 12px 32px rgba(79, 124, 255, 0.4);
+}
+.download-info { flex: 1; min-width: 0; }
+.download-name {
+    font-size: 20px; font-weight: 900; margin-bottom: 4px;
+    color: var(--txt); letter-spacing: -0.3px;
+}
+.download-meta {
+    font-size: 13px; color: var(--muted);
+    font-weight: 600; letter-spacing: 0.3px;
+    display: flex; gap: 10px; flex-wrap: wrap;
+}
+.download-meta span {
+    padding: 3px 9px; border-radius: 6px;
+    background: var(--field); border: 1px solid var(--line);
+}
+.download-btn { padding: 15px 26px; font-size: 15px; }
+
+.download-steps {
+    max-width: 640px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+.dl-step {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px 14px; text-align: center;
+}
+.dl-step-num {
+    display: inline-block; width: 26px; height: 26px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; font-weight: 900; font-size: 13px;
+    line-height: 26px; text-align: center; margin-bottom: 8px;
+}
+.dl-step-text {
+    font-size: 13px; color: var(--txt); line-height: 1.45;
+    font-weight: 600;
+}
+.dl-note {
+    max-width: 640px; margin: 20px auto 0;
+    text-align: center; color: var(--muted);
+    font-size: 13px; line-height: 1.6;
+}
+.dl-note strong { color: var(--gold); }
 
 .demo-points {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -512,6 +576,10 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
     .demo-points { grid-template-columns: 1fr; }
     .cta-card { flex-direction: column; text-align: center; }
     .cta-arrow { display: none; }
+    .download-card { flex-direction: column; text-align: center; padding: 26px 22px; }
+    .download-meta { justify-content: center; }
+    .download-btn { width: 100%; justify-content: center; }
+    .download-steps { grid-template-columns: 1fr; }
 }
 @media (max-width: 420px) {
     .hero-ctas { flex-direction: column; }
@@ -543,6 +611,7 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
             <a href="#features">Features</a>
             <a href="#how">How It Works</a>
             <a href="#demo">Demo</a>
+            <a href="#download">Download</a>
             <a href="/storyboard.html">Storyboard</a>
             <a href="/guide.html">Guide</a>
             <a href="#pricing">Pricing</a>
@@ -558,6 +627,7 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
     <a href="#features">Features</a>
     <a href="#how">How It Works</a>
     <a href="#demo">Demo</a>
+    <a href="#download">📥 Download APK</a>
     <a href="/storyboard.html">🎬 Storyboard</a>
     <a href="/guide.html">📖 Get Started Guide</a>
     <a href="#audience">Who It's For</a>
@@ -591,7 +661,8 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
         <p class="hero-sub">StormLok watches the sky, tracks live lightning strikes, and rings a real alarm on your phone before a strike can damage your solar investment.</p>
 
         <div class="hero-ctas">
-            <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20get%20StormLok%20for%20my%20solar%20system" class="btn btn-primary" target="_blank" rel="noopener">Get StormLok &mdash; &#8358;2,500</a>
+            <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20get%20unlocking%20keys%20for%20StormLok" class="btn btn-primary" target="_blank" rel="noopener">Get Unlocking Keys &mdash; &#8358;2,500</a>
+            <a href="#download" class="btn btn-gold">📥 Download APK</a>
             <a href="/guide.html" class="btn btn-secondary">📖 Read the guide</a>
         </div>
 
@@ -800,6 +871,47 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
     </div>
 </section>
 
+<!-- ============ DOWNLOAD ============ -->
+<section id="download" style="background: var(--field);">
+    <div class="container">
+        <div class="eyebrow" style="text-align: center;">Download</div>
+        <h2 class="section-title" style="text-align: center;">Get the StormLok app.</h2>
+        <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">Download the APK, install it on your Android phone, then enter your unlocking key to activate.</p>
+
+        <div class="download-card">
+            <div class="download-icon">📱</div>
+            <div class="download-info">
+                <div class="download-name">StormLok.apk</div>
+                <div class="download-meta">
+                    <span>Android 8+</span>
+                    <span>~5 MB</span>
+                    <span>v1.0</span>
+                </div>
+            </div>
+            <a href="/stormlok.apk" download class="btn btn-primary download-btn">📥 Download APK</a>
+        </div>
+
+        <div class="download-steps">
+            <div class="dl-step">
+                <div class="dl-step-num">1</div>
+                <div class="dl-step-text">Download the APK file</div>
+            </div>
+            <div class="dl-step">
+                <div class="dl-step-num">2</div>
+                <div class="dl-step-text">Allow "Install from unknown sources" if asked</div>
+            </div>
+            <div class="dl-step">
+                <div class="dl-step-num">3</div>
+                <div class="dl-step-text">Install and enter your unlocking key</div>
+            </div>
+        </div>
+
+        <p class="dl-note">
+            ⚠️ <strong>Important:</strong> The app is free to download, but you need a paid unlocking key to activate it. <a href="#pricing" style="color:var(--accent);font-weight:700">Get your unlocking keys →</a>
+        </p>
+    </div>
+</section>
+
 <section id="audience">
     <div class="container">
         <div class="eyebrow">Who It's For</div>
@@ -848,11 +960,11 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
         <div class="setup-list">
             <div class="setup-item">
                 <div class="setup-item-num">1</div>
-                <div class="setup-item-text">Install the <strong>StormLok APK</strong> on your Android phone.</div>
+                <div class="setup-item-text"><strong>Download</strong> the StormLok APK from the <a href="#download" style="color:var(--accent)">Download section</a>.</div>
             </div>
             <div class="setup-item">
                 <div class="setup-item-num">2</div>
-                <div class="setup-item-text">Input your <strong>License Key (STLK-XXXXXX-XXXXXX)</strong> into the <strong>"Unlock StormLok"</strong> Section and tap <strong>Activate</strong>.</div>
+                <div class="setup-item-text">Input your <strong>Unlocking Key (STLK-XXXXXX-XXXXXX)</strong> into the <strong>"Unlock StormLok"</strong> section and tap <strong>Activate</strong>.</div>
             </div>
             <div class="setup-item">
                 <div class="setup-item-num">3</div>
@@ -897,16 +1009,17 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
 <section id="pricing">
     <div class="container">
         <div class="eyebrow" style="text-align: center;">Pricing</div>
-        <h2 class="section-title" style="text-align: center;">One payment. Lifetime protection.</h2>
-        <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">No subscriptions. No hidden fees. No monthly costs. Just a simple, honest price.</p>
+        <h2 class="section-title" style="text-align: center;">Unlocking keys. One payment. Lifetime protection.</h2>
+        <p class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">The app is free to download. Your unlocking key removes all limits and activates full protection forever.</p>
 
         <div class="pricing-wrap">
             <div class="pricing-card">
-                <div class="pricing-badge">Complete Access</div>
+                <div class="pricing-badge">Unlocking Key</div>
                 <div class="pricing-price">2,500</div>
                 <div class="pricing-label">One-time payment &middot; Nigerian Naira</div>
 
                 <ul class="pricing-features">
+                    <li>Permanent unlocking key for your device</li>
                     <li>Real-time CAPE and weather monitoring</li>
                     <li>Live lightning strike tracking</li>
                     <li>Loud alarm that works when phone is locked</li>
@@ -916,10 +1029,10 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
                     <li>Free updates for the life of your phone</li>
                 </ul>
 
-                <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20get%20StormLok%20for%20my%20solar%20system" class="btn btn-primary pricing-cta" target="_blank" rel="noopener">Get StormLok</a>
+                <a href="https://wa.me/2347038592640?text=Hi%2C%20I%27d%20like%20to%20get%20unlocking%20keys%20for%20StormLok" class="btn btn-primary pricing-cta" target="_blank" rel="noopener">Get Unlocking Keys</a>
 
                 <div class="pricing-footnote">
-                    Or ask your solar installer to bundle StormLok with your next installation or service call.
+                    Download the app free from the <a href="#download" style="color:var(--accent);font-weight:700">Download section</a>. Or ask your solar installer to bundle StormLok with your next installation.
                 </div>
             </div>
         </div>
@@ -1042,6 +1155,7 @@ footer { padding: 48px 20px 32px; border-top: 1px solid var(--line); background:
         <div class="footer-links">
             <a href="#features">Features</a>
             <a href="#demo">Demo</a>
+            <a href="#download">Download</a>
             <a href="/storyboard.html">Storyboard</a>
             <a href="/guide.html">Guide</a>
             <a href="#pricing">Pricing</a>
